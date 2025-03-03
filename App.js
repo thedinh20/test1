@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { StyleSheet, Text, View, Image, Button, ImageBackground, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -45,13 +45,39 @@ export default function App() {
 
 const ProductScreen = () => {
   return (
-    <View style={styles.container}>
-      <Image 
-        source={{ uri: 'https://via.placeholder.com/150' }} 
-        style={styles.productImage} 
-      />
-      <Text style={styles.productName}>Lauren's Orange Juice</Text>
-    </View>
+    <ImageBackground 
+            source={require('./assets/anhscan.png')}
+            style={styles.background}
+      >
+
+        <View style={styles.container}>
+            {/* Back button
+            <TouchableOpacity style={styles.backButton}>
+                <Text style={styles.backText}>←</Text>
+            </TouchableOpacity> */}
+
+            Camera Scan
+            <View style={styles.scanBox}>
+                <Image
+                    source={require('./assets/anhscan.png')} // 
+                    style={styles.productImage} 
+                />
+            </View>
+
+            {/* Product Information */}
+            <View style={styles.productInfo}>
+                <Text style={styles.productTitle}>Lauren's</Text>
+                <Text style={styles.productName}>Orange Juice</Text>
+                <Image 
+                    source={require('./assets/anhscan.png')}
+                    style={styles.icon}
+                />
+                <TouchableOpacity style={styles.addButton}>
+                    <Text style={styles.addText}>+</Text>
+                </TouchableOpacity>
+            </View>
+        </View>
+      </ImageBackground>  
   );
 };
 
@@ -107,5 +133,60 @@ const styles = StyleSheet.create({
   productName: {
     fontSize: 24,
     marginTop: 10,
+  },
+  background: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+    padding: 20,
+  },
+  backButton: { 
+    position: 'absolute', 
+    top: 40, 
+    left: 20 },
+  backText: { 
+    fontSize: 24 },
+  scanBox: { 
+    flex: 1, 
+    justifyContent: 'center', 
+    alignItems: 'center' },
+  productImage: { 
+    width: 200, 
+    height: 300, 
+    borderRadius: 10 },
+  productInfo: { 
+    flexDirection: 'row', 
+    justifyContent: 'space-between', 
+    alignItems: 'center', 
+    padding: 20,
+    width: 350,
+    left: -20, 
+    backgroundColor: '#fff', 
+    borderRadius: 20 },
+  productTitle: { 
+    fontSize: 14,
+    top:-20,
+    left: 95,
+    color: '#666' },
+  productName: { 
+    fontSize: 18,
+    left: 20, 
+    fontWeight: 'bold' },
+  addButton: { 
+    width: 40, 
+    height: 40, 
+    borderRadius: 10, 
+    backgroundColor: '#007AFF', 
+    justifyContent: 'center', 
+    alignItems: 'center' },
+  addText: { 
+    color: '#fff', 
+    fontSize: 24 },
+  icon: {
+    top: 1, 
+    width: 50,
+    height: 50,
+    left: -200, 
+    borderRadius: 10 ,
   },
 });
